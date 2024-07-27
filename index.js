@@ -34,13 +34,20 @@ app.post("/api/user", async (req, res) => {
 	}
 
 	// Create a new user document
-	const newUser = new User({ username, email, dob: new Date(dob) });
-	await newUser.save();
+	try {
+		const newUser = new User({ username, email, dob: new Date(dob) });
+		await newUser.save();
 
-	return res.status(201).json({
-		success: true,
-		data: newUser,
-	});
+		return res.status(201).json({
+			success: true,
+			data: newUser,
+		});
+	} catch (error) {
+		return res.status(500).json({
+			success: false,
+			message: "An error occured while trying to create user.",
+		});
+	}
 });
 
 app.get("/api/users", async (req, res) => {
