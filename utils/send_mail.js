@@ -12,15 +12,14 @@ let transporter = nodemailer.createTransport({
 	},
 });
 
-// Function to send birthday emails
 const sendEmails = async (users = []) => {
 	for (const user of users) {
 		let mailOptions = {
-			from: '"Birthday Wishes" <birthday-wishes@noreply.com>', // Sender address
-			to: user.email, // List of recipients
-			subject: "Happy Birthday!", // Subject line
-			text: `Dear ${user.username},\n\nHappy Birthday! Have a great day!\n\nBest Regards,\nEmail Wisher`, // Plain text body
-			html: `<p>Dear ${user.username},</p><p>Happy Birthday! Have a great day!</p><p>Best Regards,<br>Email Wisher</p>`, // HTML body
+			from: '"Birthday Wishes" <birthday-wishes@noreply.com>',
+			to: user.email,
+			subject: "Happy Birthday!",
+			text: `Dear ${user.username},\n\nHappy Birthday! Have a great day!\n\nBest Regards,\nEmail Wisher`,
+			html: `<p>Dear ${user.username},</p><p>Happy Birthday! Have a great day!</p><p>Best Regards,<br>Email Wisher</p>`,
 		};
 
 		transporter.sendMail(mailOptions, (error, info) => {
